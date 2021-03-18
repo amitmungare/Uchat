@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Uchat</string>
+    <string name="verify_number">verify %s</string>
 </resources>
