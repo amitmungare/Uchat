@@ -11,6 +11,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var phoneNumber:String
     private lateinit var countryCode:String
+    private lateinit var alertDialogBuilder: MaterialAlertDialogBuilder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
