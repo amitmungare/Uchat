@@ -17,6 +17,12 @@
 
     </style>
 
+    <style name="NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
     <style name="ChatShapeApperance">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopLeft">22dp</item>

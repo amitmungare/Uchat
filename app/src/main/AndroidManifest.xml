@@ -16,6 +16,7 @@
         <activity
             android:name=".ChatsAvt"
             android:exported="true"></activity>
+
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
@@ -26,7 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChatActivity" />
+
         <activity android:name=".SignUpActivity" />
         <activity android:name=".OtpActivity" />
         <activity android:name=".LoginActivity" />

@@ -71,6 +71,7 @@ class ChatsAvt : AppCompatActivity() {
             adapter = chatAdapter
         }
 
+
         nameTv.text = name
         Picasso.get().load(image).into(userImgView)
 
