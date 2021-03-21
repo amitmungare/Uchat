@@ -1,4 +1,4 @@
-package com.example.uchat
+package com.example.uchat.models
 
 data class User(
     val name:String,

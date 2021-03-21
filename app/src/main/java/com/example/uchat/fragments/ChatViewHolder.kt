@@ -1,8 +1,10 @@
-package com.example.uchat
+package com.example.uchat.fragments
 
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.example.uchat.models.Inbox
+import com.example.uchat.R
 import com.example.uchat.utils.formatAsListItem
 
 import com.squareup.picasso.Picasso

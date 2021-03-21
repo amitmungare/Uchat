@@ -6,7 +6,8 @@
         <entry key="..\:/Users/Amit/AndroidStudioProjects/Uchat/app/src/main/res/drawable/count_background.xml" value="0.3769230769230769" />
         <entry key="..\:/Users/Amit/AndroidStudioProjects/Uchat/app/src/main/res/drawable/ic_chat_icons_smile.xml" value="0.18611111111111112" />
         <entry key="..\:/Users/Amit/AndroidStudioProjects/Uchat/app/src/main/res/drawable/ic_high_five_inverted.xml" value="0.18611111111111112" />
-        <entry key="..\:/Users/Amit/AndroidStudioProjects/Uchat/app/src/main/res/layout/activity_chat.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Amit/AndroidStudioProjects/Uchat/app/src/main/res/layout/activity_chat.xml" value="0.1" />
+        <entry key="..\:/Users/Amit/AndroidStudioProjects/Uchat/app/src/main/res/layout/activity_chats_avt.xml" value="0.3703125" />
         <entry key="..\:/Users/Amit/AndroidStudioProjects/Uchat/app/src/main/res/layout/activity_login.xml" value="0.34791666666666665" />
         <entry key="..\:/Users/Amit/AndroidStudioProjects/Uchat/app/src/main/res/layout/activity_main.xml" value="0.3619791666666667" />
         <entry key="..\:/Users/Amit/AndroidStudioProjects/Uchat/app/src/main/res/layout/activity_otp.xml" value="0.3619791666666667" />
@@ -18,6 +19,7 @@
         <entry key="..\:/Users/Amit/AndroidStudioProjects/Uchat/app/src/main/res/layout/list_item_chat_recv_message.xml" value="0.5" />
         <entry key="..\:/Users/Amit/AndroidStudioProjects/Uchat/app/src/main/res/layout/list_item_chat_sent_message.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Amit/AndroidStudioProjects/Uchat/app/src/main/res/layout/list_item_date_header.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Amit/AndroidStudioProjects/Uchat/app/src/main/res/menu/main_menu.xml" value="0.3703125" />
       </map>
     </option>
   </component>

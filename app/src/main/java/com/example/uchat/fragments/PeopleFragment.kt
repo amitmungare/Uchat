@@ -1,7 +1,8 @@
-package com.example.uchat
+package com.example.uchat.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.system.Os.bind
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.uchat.ChatsAvt
+import com.example.uchat.EmptyViewHolder
+import com.example.uchat.R
+import com.example.uchat.databinding.ActivityChatBinding.bind
+import com.example.uchat.databinding.ActivityLoginBinding.bind
+import com.example.uchat.databinding.EmptyViewBinding.bind
+import com.example.uchat.models.User
 import com.firebase.ui.firestore.paging.FirestorePagingAdapter
 import com.firebase.ui.firestore.paging.FirestorePagingOptions
 import com.firebase.ui.firestore.paging.LoadingState
@@ -24,32 +32,34 @@ private const val  NORMAL_VIEW_TYPE =2
 class PeopleFragment : Fragment() {
 
     private lateinit var  mAdapter: FirestorePagingAdapter<User,RecyclerView.ViewHolder>
-
-    val auth by lazy {
-        FirebaseAuth.getInstance()
-    }
+    private lateinit var viewManager: RecyclerView.LayoutManager
     val database by lazy {
         FirebaseFirestore.getInstance().collection("users")
             .orderBy("name", Query.Direction.ASCENDING)
     }
+    val auth by lazy {
+        FirebaseAuth.getInstance()
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewManager = LinearLayoutManager(requireContext())
         setUpAdapter()
         return inflater.inflate(R.layout.fragment_chats,container,false)
     }
 
     private fun setUpAdapter() {
         val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
             .setPrefetchDistance(2)
             .setPageSize(10)
-            .setEnablePlaceholders(false)
             .build()
 
         val options = FirestorePagingOptions.Builder<User>()
-            .setLifecycleOwner(viewLifecycleOwner)
+            .setLifecycleOwner(this)
             .setQuery(database,config,User::class.java)
             .build()
 
@@ -65,31 +75,27 @@ class PeopleFragment : Fragment() {
 
             }
 
-            override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int, model: User) {
-                if (holder is UserViewHolder) {
-                    holder.bind(user = model){ name: String, photo: String, id: String ->
-                        val intent = Intent(requireContext(),ChatActivity::class.java)
-                        intent.putExtra(UID,id)
-                        intent.putExtra(NAME,name)
-                        intent.putExtra(IMAGE,photo)
-                        startActivity(intent)
-
-                    }
-                }else{
-
-                }
-
-            }
-
-            override fun onLoadingStateChanged(state: LoadingState) {
-                super.onLoadingStateChanged(state)
-                when(state){
-                    LoadingState.LOADING_INITIAL -> { }
-                    LoadingState.LOADING_MORE -> { }
-                    LoadingState.LOADED -> { }
-                    LoadingState.FINISHED -> { }
-                    LoadingState.ERROR -> { }
-                }
+            override fun onBindViewHolder(
+                viewHolder: RecyclerView.ViewHolder,
+                position: Int,
+                user: User
+            ) {
+                // Bind to ViewHolder
+                if (viewHolder is UserViewHolder)
+                    if (auth.uid == user.uid) {
+                        currentList?.snapshot()?.removeAt(position)
+                        notifyItemRemoved(position)
+                    } else
+                        viewHolder.bind(user) { name: String, photo: String, id: String ->
+                            startActivity(
+                                ChatsAvt.createChatActivity(
+                                    requireContext(),
+                                    id,
+                                    name,
+                                    photo
+                                )
+                            )
+                        }
             }
 
             override fun onError(e: Exception) {
@@ -105,12 +111,24 @@ class PeopleFragment : Fragment() {
                 }
             }
 
+            override fun onLoadingStateChanged(state: LoadingState) {
+                super.onLoadingStateChanged(state)
+                when(state){
+                    LoadingState.LOADING_INITIAL -> { }
+                    LoadingState.LOADING_MORE -> { }
+                    LoadingState.LOADED -> { }
+                    LoadingState.ERROR -> { }
+                    LoadingState.FINISHED -> { }
+                }
+            }
+
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.apply {
+            setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
             adapter =mAdapter
         }
