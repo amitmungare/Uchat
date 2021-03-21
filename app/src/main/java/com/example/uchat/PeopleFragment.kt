@@ -23,7 +23,7 @@ private const val  NORMAL_VIEW_TYPE =2
 
 class PeopleFragment : Fragment() {
 
-    lateinit var  mAdapter: FirestorePagingAdapter<User,RecyclerView.ViewHolder>
+    private lateinit var  mAdapter: FirestorePagingAdapter<User,RecyclerView.ViewHolder>
 
     val auth by lazy {
         FirebaseAuth.getInstance()
@@ -55,7 +55,6 @@ class PeopleFragment : Fragment() {
 
         mAdapter = object :FirestorePagingAdapter<User, RecyclerView.ViewHolder>(options){
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
                 val inflater = layoutInflater
                  return when(viewType){
                      NORMAL_VIEW_TYPE ->{
